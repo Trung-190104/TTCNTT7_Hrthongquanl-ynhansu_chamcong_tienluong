@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_hop_dong_lao_dong_tree" model="ir.ui.view">
+        <field name="name">hop.dong.lao.dong.tree</field>
+        <field name="model">hop_dong_lao_dong</field>
+        <field name="arch" type="xml">
+            <tree string="Hợp đồng lao động" decoration-success="trang_thai=='dang_hieu_luc'" 
+                  decoration-warning="canh_bao_het_han==True" decoration-muted="trang_thai=='het_han'">
+                <field name="so_hop_dong"/>
+                <field name="nhan_vien_id"/>
+                <field name="phong_ban_id"/>
+                <field name="loai_hop_dong"/>
+                <field name="ngay_ky"/>
+                <field name="ngay_hieu_luc"/>
+                <field name="ngay_het_han"/>
+                <field name="so_ngay_con_lai" decoration-danger="so_ngay_con_lai &lt; 30"/>
+                <field name="trang_thai"/>
+                <field name="canh_bao_het_han" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_hop_dong_lao_dong_form" model="ir.ui.view">
+        <field name="name">hop.dong.lao.dong.form</field>
+        <field name="model">hop_dong_lao_dong</field>
+        <field name="arch" type="xml">
+            <form string="Hợp đồng lao động">
+                <header>
+                    <button name="action_gia_han" string="Gia hạn" type="object" 
+                            class="oe_highlight" attrs="{'invisible': [('trang_thai', '!=', 'dang_hieu_luc')]}"/>
+                    <button name="action_cham_dut" string="Chấm dứt" type="object" 
+                            attrs="{'invisible': [('trang_thai', '!=', 'dang_hieu_luc')]}"/>
+                    <field name="trang_thai" widget="statusbar" 
+                           statusbar_visible="nhap,dang_hieu_luc,het_han"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_gia_han" 
+                                icon="fa-refresh" attrs="{'invisible': [('trang_thai', '!=', 'dang_hieu_luc')]}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Gia hạn</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="alert alert-warning" role="alert" 
+                         attrs="{'invisible': [('canh_bao_het_han', '=', False)]}">
+                        <strong>Cảnh báo!</strong> Hợp đồng sắp hết hạn. Còn <field name="so_ngay_con_lai"/> ngày.
+                    </div>
+                    <field name="canh_bao_het_han" invisible="1"/>
+                    
+                    <group>
+                        <group>
+                            <field name="so_hop_dong"/>
+                            <field name="nhan_vien_id" options="{'no_create': True}"/>
+                            <field name="phong_ban_id" readonly="1"/>
+                            <field name="chuc_vu_id" readonly="1"/>
+                            <field name="loai_hop_dong"/>
+                        </group>
+                        <group>
+                            <field name="ngay_ky"/>
+                            <field name="ngay_hieu_luc"/>
+                            <field name="ngay_het_han"/>
+                            <field name="thoi_han_hop_dong" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Thông tin lương">
+                            <group>
+                                <group>
+                                    <field name="muc_luong_co_ban" widget="monetary"/>
+                                    <field name="phu_cap" widget="monetary"/>
+                                </group>
+                                <group>
+                                    <field name="tong_thu_nhap" widget="monetary" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Nội dung công việc">
+                            <group>
+                                <field name="vi_tri_cong_viec"/>
+                                <field name="dia_diem_lam_viec"/>
+                                <field name="mo_ta_cong_viec" placeholder="Mô tả chi tiết công việc..."/>
+                                <field name="che_do_lam_viec" placeholder="Thời gian làm việc, chế độ nghỉ..."/>
+                            </group>
+                        </page>
+                        
+                        <page string="Gia hạn/Chấm dứt">
+                            <group>
+                                <field name="hop_dong_cu_id" readonly="1"/>
+                                <field name="hop_dong_moi_id" readonly="1"/>
+                                <field name="ngay_cham_dut"/>
+                                <field name="ly_do_cham_dut"/>
+                            </group>
+                        </page>
+                        
+                        <page string="File đính kèm">
+                            <group>
+                                <field name="file_hop_dong" filename="file_hop_dong_name"/>
+                                <field name="file_hop_dong_name" invisible="1"/>
+                                <field name="ghi_chu"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_hop_dong_lao_dong_search" model="ir.ui.view">
+        <field name="name">hop.dong.lao.dong.search</field>
+        <field name="model">hop_dong_lao_dong</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm hợp đồng">
+                <field name="so_hop_dong"/>
+                <field name="nhan_vien_id"/>
+                <field name="phong_ban_id"/>
+                <filter string="Đang hiệu lực" name="dang_hieu_luc" domain="[('trang_thai', '=', 'dang_hieu_luc')]"/>
+                <filter string="Sắp hết hạn" name="sap_het_han" domain="[('canh_bao_het_han', '=', True)]"/>
+                <filter string="Hết hạn" name="het_han" domain="[('trang_thai', '=', 'het_han')]"/>
+                <separator/>
+                <filter string="Thử việc" name="thu_viec" domain="[('loai_hop_dong', '=', 'thu_viec')]"/>
+                <filter string="Có thời hạn" name="co_thoi_han" domain="[('loai_hop_dong', 'in', ['co_thoi_han_1_nam', 'co_thoi_han_3_nam'])]"/>
+                <filter string="Không thời hạn" name="khong_thoi_han" domain="[('loai_hop_dong', '=', 'khong_thoi_han')]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Nhân viên" name="group_nhan_vien" context="{'group_by': 'nhan_vien_id'}"/>
+                    <filter string="Phòng ban" name="group_phong_ban" context="{'group_by': 'phong_ban_id'}"/>
+                    <filter string="Loại hợp đồng" name="group_loai" context="{'group_by': 'loai_hop_dong'}"/>
+                    <filter string="Trạng thái" name="group_trang_thai" context="{'group_by': 'trang_thai'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hop_dong_lao_dong" model="ir.actions.act_window">
+        <field name="name">Hợp đồng lao động</field>
+        <field name="res_model">hop_dong_lao_dong</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo hợp đồng lao động mới
+            </p>
+        </field>
+    </record>
+
+</odoo>

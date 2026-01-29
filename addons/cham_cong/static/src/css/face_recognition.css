@@ -1,0 +1,66 @@
+.face-recognition-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.video-container {
+    position: relative;
+    margin: 20px 0;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.video-container video {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.video-container canvas {
+    display: none;
+}
+
+.button-group {
+    margin: 20px 0;
+}
+
+.button-group button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.message-container {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.message-container.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.message-container.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.message-container.alert-info {
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
+}
+
+.message-container.alert-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+}

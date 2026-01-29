@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_bang_luong" model="ir.actions.report">
+        <field name="name">Phiếu lương</field>
+        <field name="model">bang_luong</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tinh_luong.report_bang_luong_document</field>
+        <field name="report_file">tinh_luong.report_bang_luong_document</field>
+        <field name="binding_model_id" ref="model_bang_luong"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_bang_luong_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">PHIẾU LƯƠNG</h2>
+                        <h3 class="text-center">Tháng <t t-esc="o.thang"/>/<t t-esc="o.nam"/></h3>
+                        
+                        <div class="row mt32">
+                            <div class="col-6">
+                                <strong>Nhân viên:</strong> <span t-field="o.nhan_vien_id"/><br/>
+                                <strong>Phòng ban:</strong> <span t-field="o.phong_ban_id"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Mã:</strong> <span t-field="o.ma_bang_luong"/>
+                            </div>
+                        </div>
+
+                        <h4 class="mt32">Thu nhập</h4>
+                        <table class="table table-sm table-bordered">
+                            <tr>
+                                <td>Lương theo công</td>
+                                <td class="text-right"><span t-field="o.luong_theo_cong"/></td>
+                            </tr>
+                            <tr>
+                                <td>Phụ cấp</td>
+                                <td class="text-right"><span t-field="o.tong_phu_cap"/></td>
+                            </tr>
+                            <tr class="font-weight-bold">
+                                <td>Tổng thu nhập</td>
+                                <td class="text-right"><span t-field="o.tong_thu_nhap"/></td>
+                            </tr>
+                        </table>
+
+                        <h4 class="mt16">Khấu trừ</h4>
+                        <table class="table table-sm table-bordered">
+                            <tr>
+                                <td>BHXH + BHYT + BHTN</td>
+                                <td class="text-right"><span t-field="o.tong_bao_hiem"/></td>
+                            </tr>
+                            <tr>
+                                <td>Thuế TNCN</td>
+                                <td class="text-right"><span t-field="o.thue_tncn"/></td>
+                            </tr>
+                            <tr class="font-weight-bold">
+                                <td>Tổng khấu trừ</td>
+                                <td class="text-right"><span t-field="o.tong_khau_tru"/></td>
+                            </tr>
+                        </table>
+
+                        <h3 class="text-center mt32">
+                            LƯƠNG THỰC LĨNH: <span t-field="o.luong_thuc_linh"/> VNĐ
+                        </h3>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

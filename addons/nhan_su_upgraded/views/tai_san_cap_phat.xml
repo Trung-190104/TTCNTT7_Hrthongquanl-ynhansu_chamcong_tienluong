@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_tai_san_cap_phat_tree" model="ir.ui.view">
+        <field name="name">tai.san.cap.phat.tree</field>
+        <field name="model">tai_san_cap_phat</field>
+        <field name="arch" type="xml">
+            <tree string="Tài sản cấp phát" decoration-success="trang_thai=='dang_su_dung'" 
+                  decoration-danger="trang_thai=='hong_hoc'" decoration-muted="trang_thai=='thanh_ly'">
+                <field name="ma_tai_san"/>
+                <field name="ten_tai_san"/>
+                <field name="loai_tai_san_id"/>
+                <field name="nhan_vien_id"/>
+                <field name="phong_ban_id"/>
+                <field name="ngay_cap_phat"/>
+                <field name="trang_thai"/>
+                <field name="tinh_trang"/>
+                <field name="gia_tri" widget="monetary"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_tai_san_cap_phat_form" model="ir.ui.view">
+        <field name="name">tai.san.cap.phat.form</field>
+        <field name="model">tai_san_cap_phat</field>
+        <field name="arch" type="xml">
+            <form string="Tài sản cấp phát">
+                <header>
+                    <button name="action_cap_phat" string="Cấp phát" type="object" 
+                            class="oe_highlight" attrs="{'invisible': [('trang_thai', '!=', 'kho')]}"/>
+                    <button name="action_thu_hoi" string="Thu hồi" type="object" 
+                            class="oe_highlight" attrs="{'invisible': [('trang_thai', '!=', 'dang_su_dung')]}"/>
+                    <button name="action_bao_hong" string="Báo hỏng" type="object" 
+                            attrs="{'invisible': [('trang_thai', 'not in', ['dang_su_dung', 'kho'])]}"/>
+                    <button name="action_thanh_ly" string="Thanh lý" type="object" 
+                            attrs="{'invisible': [('trang_thai', 'in', ['dang_su_dung', 'thanh_ly'])]}"/>
+                    <field name="trang_thai" widget="statusbar" 
+                           statusbar_visible="kho,dang_su_dung,da_thu_hoi"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Thông tin tài sản">
+                            <field name="ma_tai_san"/>
+                            <field name="ten_tai_san"/>
+                            <field name="loai_tai_san_id" options="{'no_create': True}"/>
+                            <field name="nhan_hieu"/>
+                            <field name="model"/>
+                            <field name="serial_number"/>
+                        </group>
+                        <group string="Thông tin giá trị">
+                            <field name="ngay_mua"/>
+                            <field name="gia_tri" widget="monetary"/>
+                            <field name="tinh_trang"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Thông tin cấp phát">
+                            <group>
+                                <group>
+                                    <field name="nhan_vien_id" options="{'no_create': True}"/>
+                                    <field name="phong_ban_id" readonly="1"/>
+                                    <field name="ngay_cap_phat"/>
+                                    <field name="nguoi_cap_phat_id"/>
+                                </group>
+                                <group>
+                                    <field name="ngay_thu_hoi"/>
+                                    <field name="nguoi_thu_hoi_id"/>
+                                    <field name="ly_do_thu_hoi"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Biên bản">
+                            <group>
+                                <group string="Biên bản bàn giao">
+                                    <field name="bien_ban_ban_giao" filename="bien_ban_ban_giao_name"/>
+                                    <field name="bien_ban_ban_giao_name" invisible="1"/>
+                                </group>
+                                <group string="Biên bản thu hồi">
+                                    <field name="bien_ban_thu_hoi" filename="bien_ban_thu_hoi_name"/>
+                                    <field name="bien_ban_thu_hoi_name" invisible="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Ghi chú">
+                            <field name="ghi_chu" placeholder="Ghi chú thêm về tài sản..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_tai_san_cap_phat_kanban" model="ir.ui.view">
+        <field name="name">tai.san.cap.phat.kanban</field>
+        <field name="model">tai_san_cap_phat</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="ma_tai_san"/>
+                <field name="ten_tai_san"/>
+                <field name="loai_tai_san_id"/>
+                <field name="nhan_vien_id"/>
+                <field name="trang_thai"/>
+                <field name="tinh_trang"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title"><field name="ten_tai_san"/></strong><br/>
+                                    <span class="o_kanban_record_subtitle"><field name="ma_tai_san"/></span>
+                                </div>
+                                <span class="float-right badge badge-pill">
+                                    <field name="trang_thai"/>
+                                </span>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left">
+                                    <field name="loai_tai_san_id"/>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <field name="nhan_vien_id" widget="many2one_avatar_user"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_tai_san_cap_phat_search" model="ir.ui.view">
+        <field name="name">tai.san.cap.phat.search</field>
+        <field name="model">tai_san_cap_phat</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm tài sản">
+                <field name="ma_tai_san"/>
+                <field name="ten_tai_san"/>
+                <field name="nhan_vien_id"/>
+                <field name="loai_tai_san_id"/>
+                <field name="serial_number"/>
+                <filter string="Trong kho" name="kho" domain="[('trang_thai', '=', 'kho')]"/>
+                <filter string="Đang sử dụng" name="dang_su_dung" domain="[('trang_thai', '=', 'dang_su_dung')]"/>
+                <filter string="Đã thu hồi" name="da_thu_hoi" domain="[('trang_thai', '=', 'da_thu_hoi')]"/>
+                <filter string="Hỏng hóc" name="hong_hoc" domain="[('trang_thai', '=', 'hong_hoc')]"/>
+                <separator/>
+                <filter string="Tình trạng tốt" name="tinh_trang_tot" domain="[('tinh_trang', '=', 'tot')]"/>
+                <filter string="Cần sửa chữa" name="can_sua_chua" domain="[('tinh_trang', '=', 'can_sua_chua')]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Loại tài sản" name="group_loai" context="{'group_by': 'loai_tai_san_id'}"/>
+                    <filter string="Nhân viên" name="group_nhan_vien" context="{'group_by': 'nhan_vien_id'}"/>
+                    <filter string="Phòng ban" name="group_phong_ban" context="{'group_by': 'phong_ban_id'}"/>
+                    <filter string="Trạng thái" name="group_trang_thai" context="{'group_by': 'trang_thai'}"/>
+                    <filter string="Tình trạng" name="group_tinh_trang" context="{'group_by': 'tinh_trang'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_tai_san_cap_phat" model="ir.actions.act_window">
+        <field name="name">Tài sản cấp phát</field>
+        <field name="res_model">tai_san_cap_phat</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Thêm tài sản mới
+            </p>
+        </field>
+    </record>
+
+</odoo>

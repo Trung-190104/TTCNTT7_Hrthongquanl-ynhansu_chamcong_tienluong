@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ca_lam_viec_tree" model="ir.ui.view">
+        <field name="name">ca.lam.viec.tree</field>
+        <field name="model">ca_lam_viec</field>
+        <field name="arch" type="xml">
+            <tree string="Ca làm việc">
+                <field name="ma_ca"/>
+                <field name="ten_ca"/>
+                <field name="gio_bat_dau"/>
+                <field name="gio_ket_thuc"/>
+                <field name="so_gio_lam_viec"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ca_lam_viec_form" model="ir.ui.view">
+        <field name="name">ca.lam.viec.form</field>
+        <field name="model">ca_lam_viec</field>
+        <field name="arch" type="xml">
+            <form string="Ca làm việc">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <group>
+                        <group>
+                            <field name="ma_ca"/>
+                            <field name="ten_ca"/>
+                        </group>
+                        <group>
+                            <field name="gio_bat_dau" placeholder="VD: 08:00"/>
+                            <field name="gio_ket_thuc" placeholder="VD: 17:00"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="mo_ta" placeholder="Mô tả về ca làm việc..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ca_lam_viec" model="ir.actions.act_window">
+        <field name="name">Ca làm việc</field>
+        <field name="res_model">ca_lam_viec</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

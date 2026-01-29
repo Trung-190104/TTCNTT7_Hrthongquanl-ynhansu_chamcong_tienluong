@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Actions cho Nhân sự -->
+    
+    <!-- Action Nhân viên -->
+    <record id="action_nhan_vien" model="ir.actions.act_window">
+        <field name="name">Nhân viên</field>
+        <field name="res_model">nhan_vien</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Phòng ban -->
+    <record id="action_phong_ban" model="ir.actions.act_window">
+        <field name="name">Phòng ban</field>
+        <field name="res_model">phong_ban</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Chức vụ -->
+    <record id="action_chuc_vu" model="ir.actions.act_window">
+        <field name="name">Chức vụ</field>
+        <field name="res_model">chuc_vu</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Hợp đồng -->
+    <record id="action_hop_dong_lao_dong" model="ir.actions.act_window">
+        <field name="name">Hợp đồng lao động</field>
+        <field name="res_model">hop_dong_lao_dong</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Đánh giá -->
+    <record id="action_danh_gia_nhan_vien" model="ir.actions.act_window">
+        <field name="name">Đánh giá nhân viên</field>
+        <field name="res_model">danh_gia_nhan_vien</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Tài sản -->
+    <record id="action_tai_san_cap_phat" model="ir.actions.act_window">
+        <field name="name">Tài sản cấp phát</field>
+        <field name="res_model">tai_san_cap_phat</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Loại tài sản -->
+    <record id="action_loai_tai_san" model="ir.actions.act_window">
+        <field name="name">Loại tài sản</field>
+        <field name="res_model">loai_tai_san</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Chứng chỉ -->
+    <record id="action_chung_chi_bang_cap" model="ir.actions.act_window">
+        <field name="name">Chứng chỉ bằng cấp</field>
+        <field name="res_model">chung_chi_bang_cap</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Danh sách chứng chỉ -->
+    <record id="action_danh_sach_chung_chi_bang_cap" model="ir.actions.act_window">
+        <field name="name">Danh sách chứng chỉ bằng cấp</field>
+        <field name="res_model">danh_sach_chung_chi_bang_cap</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Lịch sử công tác -->
+    <record id="action_lich_su_cong_tac" model="ir.actions.act_window">
+        <field name="name">Lịch sử công tác</field>
+        <field name="res_model">lich_su_cong_tac</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

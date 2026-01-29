@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Bậc 1: Đến 5 triệu - 5% -->
+        <record id="thue_bac_1" model="thue_tncn_bac">
+            <field name="bac">1</field>
+            <field name="thu_nhap_tu">0</field>
+            <field name="thu_nhap_den">5</field>
+            <field name="thue_suat">5</field>
+            <field name="ghi_chu">Bậc 1: Thu nhập đến 5 triệu/tháng</field>
+        </record>
+
+        <!-- Bậc 2: Trên 5 đến 10 triệu - 10% -->
+        <record id="thue_bac_2" model="thue_tncn_bac">
+            <field name="bac">2</field>
+            <field name="thu_nhap_tu">5</field>
+            <field name="thu_nhap_den">10</field>
+            <field name="thue_suat">10</field>
+            <field name="ghi_chu">Bậc 2: Thu nhập trên 5 đến 10 triệu/tháng</field>
+        </record>
+
+        <!-- Bậc 3: Trên 10 đến 18 triệu - 15% -->
+        <record id="thue_bac_3" model="thue_tncn_bac">
+            <field name="bac">3</field>
+            <field name="thu_nhap_tu">10</field>
+            <field name="thu_nhap_den">18</field>
+            <field name="thue_suat">15</field>
+            <field name="ghi_chu">Bậc 3: Thu nhập trên 10 đến 18 triệu/tháng</field>
+        </record>
+
+        <!-- Bậc 4: Trên 18 đến 32 triệu - 20% -->
+        <record id="thue_bac_4" model="thue_tncn_bac">
+            <field name="bac">4</field>
+            <field name="thu_nhap_tu">18</field>
+            <field name="thu_nhap_den">32</field>
+            <field name="thue_suat">20</field>
+            <field name="ghi_chu">Bậc 4: Thu nhập trên 18 đến 32 triệu/tháng</field>
+        </record>
+
+        <!-- Bậc 5: Trên 32 đến 52 triệu - 25% -->
+        <record id="thue_bac_5" model="thue_tncn_bac">
+            <field name="bac">5</field>
+            <field name="thu_nhap_tu">32</field>
+            <field name="thu_nhap_den">52</field>
+            <field name="thue_suat">25</field>
+            <field name="ghi_chu">Bậc 5: Thu nhập trên 32 đến 52 triệu/tháng</field>
+        </record>
+
+        <!-- Bậc 6: Trên 52 đến 80 triệu - 30% -->
+        <record id="thue_bac_6" model="thue_tncn_bac">
+            <field name="bac">6</field>
+            <field name="thu_nhap_tu">52</field>
+            <field name="thu_nhap_den">80</field>
+            <field name="thue_suat">30</field>
+            <field name="ghi_chu">Bậc 6: Thu nhập trên 52 đến 80 triệu/tháng</field>
+        </record>
+
+        <!-- Bậc 7: Trên 80 triệu - 35% -->
+        <record id="thue_bac_7" model="thue_tncn_bac">
+            <field name="bac">7</field>
+            <field name="thu_nhap_tu">80</field>
+            <field name="thu_nhap_den" eval="0"/>
+            <field name="thue_suat">35</field>
+            <field name="ghi_chu">Bậc 7: Thu nhập trên 80 triệu/tháng</field>
+        </record>
+    </data>
+</odoo>

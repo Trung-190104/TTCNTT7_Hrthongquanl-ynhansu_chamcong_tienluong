@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_bao_cao_luong_tree" model="ir.ui.view">
+        <field name="name">bao.cao.luong.tree</field>
+        <field name="model">bao_cao_luong</field>
+        <field name="arch" type="xml">
+            <tree string="Báo cáo lương" create="false" edit="false" delete="false">
+                <field name="nhan_vien_id"/>
+                <field name="phong_ban_id"/>
+                <field name="chuc_vu_id"/>
+                <field name="thang"/>
+                <field name="nam"/>
+                <field name="luong_co_ban" widget="monetary"/>
+                <field name="tong_thu_nhap" widget="monetary"/>
+                <field name="tong_khau_tru" widget="monetary"/>
+                <field name="luong_thuc_linh" widget="monetary"/>
+                <field name="trang_thai" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_bao_cao_luong_pivot" model="ir.ui.view">
+        <field name="name">bao.cao.luong.pivot</field>
+        <field name="model">bao_cao_luong</field>
+        <field name="arch" type="xml">
+            <pivot string="Báo cáo lương">
+                <field name="phong_ban_id" type="row"/>
+                <field name="thang" type="col"/>
+                <field name="luong_thuc_linh" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_bao_cao_luong_graph" model="ir.ui.view">
+        <field name="name">bao.cao.luong.graph</field>
+        <field name="model">bao_cao_luong</field>
+        <field name="arch" type="xml">
+            <graph string="Báo cáo lương" type="bar">
+                <field name="phong_ban_id"/>
+                <field name="luong_thuc_linh" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_bao_cao_luong" model="ir.actions.act_window">
+        <field name="name">Báo cáo lương</field>
+        <field name="res_model">bao_cao_luong</field>
+        <field name="view_mode">pivot,graph,tree</field>
+    </record>
+</odoo>

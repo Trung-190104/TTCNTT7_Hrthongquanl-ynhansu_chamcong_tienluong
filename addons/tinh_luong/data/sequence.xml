@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sequence cho bảng lương -->
+    <record id="seq_bang_luong" model="ir.sequence">
+        <field name="name">Mã bảng lương</field>
+        <field name="code">bang_luong</field>
+        <field name="prefix">BL</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- Sequence cho phụ cấp nhân viên -->
+    <record id="seq_phu_cap_nhan_vien" model="ir.sequence">
+        <field name="name">Mã phụ cấp nhân viên</field>
+        <field name="code">phu_cap_nhan_vien</field>
+        <field name="prefix">PC</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

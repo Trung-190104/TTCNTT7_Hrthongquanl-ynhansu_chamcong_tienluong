@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Actions cho Chấm công -->
+    
+    <!-- Action Bảng chấm công -->
+    <record id="action_bang_cham_cong" model="ir.actions.act_window">
+        <field name="name">Bảng chấm công</field>
+        <field name="res_model">bang_cham_cong</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Tổng hợp công -->
+    <record id="action_tong_hop_cong_thang" model="ir.actions.act_window">
+        <field name="name">Tổng hợp công tháng</field>
+        <field name="res_model">tong_hop_cong_thang</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Đợt đăng ký -->
+    <record id="action_dot_dang_ky" model="ir.actions.act_window">
+        <field name="name">Đợt đăng ký</field>
+        <field name="res_model">dot_dang_ky</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Đăng ký ca làm theo ngày -->
+    <record id="action_dang_ky_ca_lam_theo_ngay" model="ir.actions.act_window">
+        <field name="name">Đăng ký ca làm theo ngày</field>
+        <field name="res_model">dang_ky_ca_lam_theo_ngay</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Đơn từ -->
+    <record id="action_don_tu" model="ir.actions.act_window">
+        <field name="name">Đơn từ</field>
+        <field name="res_model">don_tu</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Ca làm việc -->
+    <record id="action_ca_lam_viec" model="ir.actions.act_window">
+        <field name="name">Ca làm việc</field>
+        <field name="res_model">ca_lam_viec</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Điểm danh thủ công -->
+    <record id="action_diem_danh_thu_cong" model="ir.actions.act_window">
+        <field name="name">Điểm danh thủ công</field>
+        <field name="res_model">diem_danh_thu_cong</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_danh_gia_nhan_vien_tree" model="ir.ui.view">
+        <field name="name">danh.gia.nhan.vien.tree</field>
+        <field name="model">danh_gia_nhan_vien</field>
+        <field name="arch" type="xml">
+            <tree string="Đánh giá nhân viên" decoration-success="trang_thai=='da_duyet'" 
+                  decoration-warning="trang_thai=='cho_duyet'" decoration-danger="trang_thai=='tu_choi'">
+                <field name="ma_danh_gia"/>
+                <field name="nhan_vien_id"/>
+                <field name="phong_ban_id"/>
+                <field name="ngay_danh_gia"/>
+                <field name="ky_danh_gia"/>
+                <field name="diem_tong" widget="progressbar"/>
+                <field name="xep_loai"/>
+                <field name="trang_thai"/>
+                <field name="nguoi_danh_gia_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_danh_gia_nhan_vien_form" model="ir.ui.view">
+        <field name="name">danh.gia.nhan.vien.form</field>
+        <field name="model">danh_gia_nhan_vien</field>
+        <field name="arch" type="xml">
+            <form string="Đánh giá nhân viên">
+                <header>
+                    <field name="trang_thai" widget="statusbar" 
+                           statusbar_visible="nhap,cho_duyet,da_duyet"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="ma_danh_gia" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="nhan_vien_id" options="{'no_create': True}"/>
+                            <field name="phong_ban_id" readonly="1"/>
+                            <field name="chuc_vu_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="ngay_danh_gia"/>
+                            <field name="ky_danh_gia"/>
+                            <field name="thang" attrs="{'invisible': [('ky_danh_gia', '!=', 'thang')], 'required': [('ky_danh_gia', '=', 'thang')]}"/>
+                            <field name="quy" attrs="{'invisible': [('ky_danh_gia', '!=', 'quy')], 'required': [('ky_danh_gia', '=', 'quy')]}"/>
+                            <field name="nam"/>
+                            <field name="nguoi_danh_gia_id"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Tiêu chí đánh giá">
+                            <group>
+                                <group string="Điểm đánh giá (0-100)">
+                                    <field name="diem_kpi"/>
+                                    <field name="diem_ky_nang"/>
+                                    <field name="diem_thai_do"/>
+                                    <field name="diem_dong_gop"/>
+                                    <field name="diem_hoc_tap"/>
+                                </group>
+                                <group string="Kết quả">
+                                    <field name="diem_tong" widget="progressbar"/>
+                                    <field name="xep_loai" widget="badge" 
+                                           decoration-success="xep_loai=='xuat_sac'"
+                                           decoration-info="xep_loai=='tot'"
+                                           decoration-warning="xep_loai=='trung_binh'"
+                                           decoration-danger="xep_loai=='yeu'"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Nhận xét">
+                            <group>
+                                <field name="diem_manh" placeholder="Ghi chú về các điểm mạnh của nhân viên..."/>
+                                <field name="diem_yeu" placeholder="Ghi chú về các điểm cần cải thiện..."/>
+                                <field name="ke_hoach_phat_trien" placeholder="Kế hoạch phát triển và đào tạo..."/>
+                                <field name="nhan_xet_chung" placeholder="Nhận xét tổng quát..."/>
+                            </group>
+                        </page>
+                        
+                        <page string="Thông tin khác" attrs="{'invisible': [('trang_thai', '!=', 'tu_choi')]}">
+                            <group>
+                                <field name="ly_do_tu_choi"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_danh_gia_nhan_vien_search" model="ir.ui.view">
+        <field name="name">danh.gia.nhan.vien.search</field>
+        <field name="model">danh_gia_nhan_vien</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm đánh giá">
+                <field name="ma_danh_gia"/>
+                <field name="nhan_vien_id"/>
+                <field name="phong_ban_id"/>
+                <field name="nguoi_danh_gia_id"/>
+                <filter string="Nháp" name="nhap" domain="[('trang_thai', '=', 'nhap')]"/>
+                <filter string="Chờ duyệt" name="cho_duyet" domain="[('trang_thai', '=', 'cho_duyet')]"/>
+                <filter string="Đã duyệt" name="da_duyet" domain="[('trang_thai', '=', 'da_duyet')]"/>
+                <separator/>
+                <filter string="Xuất sắc" name="xuat_sac" domain="[('xep_loai', '=', 'xuat_sac')]"/>
+                <filter string="Tốt" name="tot" domain="[('xep_loai', '=', 'tot')]"/>
+                <filter string="Trung bình" name="trung_binh" domain="[('xep_loai', '=', 'trung_binh')]"/>
+                <filter string="Yếu" name="yeu" domain="[('xep_loai', '=', 'yeu')]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Phòng ban" name="group_phong_ban" context="{'group_by': 'phong_ban_id'}"/>
+                    <filter string="Kỳ đánh giá" name="group_ky" context="{'group_by': 'ky_danh_gia'}"/>
+                    <filter string="Xếp loại" name="group_xep_loai" context="{'group_by': 'xep_loai'}"/>
+                    <filter string="Trạng thái" name="group_trang_thai" context="{'group_by': 'trang_thai'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_danh_gia_nhan_vien" model="ir.actions.act_window">
+        <field name="name">Đánh giá nhân viên</field>
+        <field name="res_model">danh_gia_nhan_vien</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo đánh giá nhân viên mới
+            </p>
+        </field>
+    </record>
+
+</odoo>

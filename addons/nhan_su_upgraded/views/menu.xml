@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu chính Nhân sự -->
+    <menuitem id="menu_nhan_su_root" 
+              name="Nhân sự" 
+              sequence="10"/>
+
+    <!-- Nhân viên -->
+    <menuitem id="menu_nhan_vien" 
+              name="Nhân viên"
+              parent="menu_nhan_su_root"
+              action="action_nhan_vien"
+              sequence="10"/>
+
+    <!-- Hợp đồng -->
+    <menuitem id="menu_hop_dong" 
+              name="Hợp đồng lao động"
+              parent="menu_nhan_su_root"
+              action="action_hop_dong_lao_dong"
+              sequence="20"/>
+
+    <!-- Đánh giá -->
+    <menuitem id="menu_danh_gia" 
+              name="Đánh giá nhân viên"
+              parent="menu_nhan_su_root"
+              action="action_danh_gia_nhan_vien"
+              sequence="30"/>
+
+    <!-- Tài sản -->
+    <menuitem id="menu_tai_san"
+              name="Tài sản cấp phát"
+              parent="menu_nhan_su_root"
+              sequence="40"/>
+
+    <menuitem id="menu_tai_san_cap_phat"
+              name="Danh sách tài sản"
+              parent="menu_tai_san"
+              action="action_tai_san_cap_phat"
+              sequence="10"/>
+
+    <menuitem id="menu_loai_tai_san"
+              name="Loại tài sản"
+              parent="menu_tai_san"
+              action="action_loai_tai_san"
+              sequence="20"/>
+
+    <!-- Cấu hình -->
+    <menuitem id="menu_cau_hinh_nhan_su"
+              name="Cấu hình"
+              parent="menu_nhan_su_root"
+              sequence="100"/>
+
+    <menuitem id="menu_phong_ban"
+              name="Phòng ban"
+              parent="menu_cau_hinh_nhan_su"
+              action="action_phong_ban"
+              sequence="10"/>
+
+    <menuitem id="menu_chuc_vu"
+              name="Chức vụ"
+              parent="menu_cau_hinh_nhan_su"
+              action="action_chuc_vu"
+              sequence="20"/>
+
+    <menuitem id="menu_chung_chi_bang_cap"
+              name="Chứng chỉ bằng cấp"
+              parent="menu_cau_hinh_nhan_su"
+              action="action_chung_chi_bang_cap"
+              sequence="30"/>
+</odoo>

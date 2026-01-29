@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_phu_cap_nhan_vien_tree" model="ir.ui.view">
+        <field name="name">phu.cap.nhan.vien.tree</field>
+        <field name="model">phu_cap_nhan_vien</field>
+        <field name="arch" type="xml">
+            <tree string="Phụ cấp nhân viên">
+                <field name="ma_phu_cap_nv"/>
+                <field name="nhan_vien_id"/>
+                <field name="phong_ban_id"/>
+                <field name="loai_phu_cap_id"/>
+                <field name="muc_phu_cap" widget="monetary"/>
+                <field name="ngay_ap_dung"/>
+                <field name="ngay_ket_thuc"/>
+                <field name="trang_thai" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_phu_cap_nhan_vien_form" model="ir.ui.view">
+        <field name="name">phu.cap.nhan.vien.form</field>
+        <field name="model">phu_cap_nhan_vien</field>
+        <field name="arch" type="xml">
+            <form string="Phụ cấp nhân viên">
+                <header>
+                    <button name="action_ket_thuc" string="Kết thúc" type="object" 
+                            attrs="{'invisible': [('trang_thai', '!=', 'dang_ap_dung')]}" 
+                            class="oe_highlight"/>
+                    <field name="trang_thai" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="ma_phu_cap_nv"/>
+                            <field name="nhan_vien_id" options="{'no_create': True}"/>
+                            <field name="phong_ban_id"/>
+                            <field name="chuc_vu_id"/>
+                        </group>
+                        <group>
+                            <field name="loai_phu_cap_id" options="{'no_create': True}"/>
+                            <field name="muc_phu_cap" widget="monetary"/>
+                            <field name="ngay_ap_dung"/>
+                            <field name="ngay_ket_thuc"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="ghi_chu" placeholder="Ghi chú..."/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_phu_cap_nhan_vien" model="ir.actions.act_window">
+        <field name="name">Phụ cấp nhân viên</field>
+        <field name="res_model">phu_cap_nhan_vien</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

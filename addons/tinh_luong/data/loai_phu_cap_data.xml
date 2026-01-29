@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Phụ cấp ăn trưa -->
+        <record id="phu_cap_an_trua" model="loai_phu_cap">
+            <field name="ma_phu_cap">PC_AN_TRUA</field>
+            <field name="ten_phu_cap">Phụ cấp ăn trưa</field>
+            <field name="loai">theo_ngay</field>
+            <field name="muc_phu_cap_mac_dinh">30000</field>
+            <field name="tinh_bao_hiem" eval="False"/>
+            <field name="tinh_thue" eval="True"/>
+            <field name="mo_ta">Phụ cấp ăn trưa theo ngày công</field>
+        </record>
+
+        <!-- Phụ cấp xăng xe -->
+        <record id="phu_cap_xang_xe" model="loai_phu_cap">
+            <field name="ma_phu_cap">PC_XANG_XE</field>
+            <field name="ten_phu_cap">Phụ cấp xăng xe</field>
+            <field name="loai">co_dinh</field>
+            <field name="muc_phu_cap_mac_dinh">500000</field>
+            <field name="tinh_bao_hiem" eval="False"/>
+            <field name="tinh_thue" eval="True"/>
+            <field name="mo_ta">Phụ cấp xăng xe cố định hàng tháng</field>
+        </record>
+
+        <!-- Phụ cấp điện thoại -->
+        <record id="phu_cap_dien_thoai" model="loai_phu_cap">
+            <field name="ma_phu_cap">PC_DIEN_THOAI</field>
+            <field name="ten_phu_cap">Phụ cấp điện thoại</field>
+            <field name="loai">co_dinh</field>
+            <field name="muc_phu_cap_mac_dinh">200000</field>
+            <field name="tinh_bao_hiem" eval="False"/>
+            <field name="tinh_thue" eval="True"/>
+            <field name="mo_ta">Phụ cấp điện thoại cố định</field>
+        </record>
+
+        <!-- Phụ cấp chức vụ - ĐÃ SỬA: Xóa dấu cách trong ID -->
+        <record id="phu_cap_chuc_vu" model="loai_phu_cap">
+            <field name="ma_phu_cap">PC_CHUC_VU</field>
+            <field name="ten_phu_cap">Phụ cấp chức vụ</field>
+            <field name="loai">co_dinh</field>
+            <field name="muc_phu_cap_mac_dinh">1000000</field>
+            <field name="tinh_bao_hiem" eval="True"/>
+            <field name="tinh_thue" eval="True"/>
+            <field name="mo_ta">Phụ cấp theo chức vụ quản lý</field>
+        </record>
+
+        <!-- Phụ cấp trách nhiệm -->
+        <record id="phu_cap_trach_nhiem" model="loai_phu_cap">
+            <field name="ma_phu_cap">PC_TRACH_NHIEM</field>
+            <field name="ten_phu_cap">Phụ cấp trách nhiệm</field>
+            <field name="loai">co_dinh</field>
+            <field name="muc_phu_cap_mac_dinh">500000</field>
+            <field name="tinh_bao_hiem" eval="True"/>
+            <field name="tinh_thue" eval="True"/>
+            <field name="mo_ta">Phụ cấp trách nhiệm công việc</field>
+        </record>
+
+        <!-- Phụ cấp độc hại -->
+        <record id="phu_cap_doc_hai" model="loai_phu_cap">
+            <field name="ma_phu_cap">PC_DOC_HAI</field>
+            <field name="ten_phu_cap">Phụ cấp độc hại</field>
+            <field name="loai">co_dinh</field>
+            <field name="muc_phu_cap_mac_dinh">1500000</field>
+            <field name="tinh_bao_hiem" eval="True"/>
+            <field name="tinh_thue" eval="True"/>
+            <field name="mo_ta">Phụ cấp cho môi trường làm việc độc hại</field>
+        </record>
+
+        <!-- Phụ cấp thâm niên -->
+        <record id="phu_cap_tham_nien" model="loai_phu_cap">
+            <field name="ma_phu_cap">PC_THAM_NIEN</field>
+            <field name="ten_phu_cap">Phụ cấp thâm niên</field>
+            <field name="loai">co_dinh</field>
+            <field name="muc_phu_cap_mac_dinh">300000</field>
+            <field name="tinh_bao_hiem" eval="True"/>
+            <field name="tinh_thue" eval="True"/>
+            <field name="mo_ta">Phụ cấp thâm niên công tác</field>
+        </record>
+    </data>
+</odoo>

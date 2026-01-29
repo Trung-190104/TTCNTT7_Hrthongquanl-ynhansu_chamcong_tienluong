@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Ca làm việc mẫu -->
+        <record id="ca_lam_viec_sang" model="ca_lam_viec">
+            <field name="ma_ca">CA_SANG</field>
+            <field name="ten_ca">Sáng</field>
+            <field name="gio_bat_dau">07:30</field>
+            <field name="gio_ket_thuc">11:30</field>
+            <field name="mo_ta">Ca làm việc buổi sáng</field>
+        </record>
+
+        <record id="ca_lam_viec_chieu" model="ca_lam_viec">
+            <field name="ma_ca">CA_CHIEU</field>
+            <field name="ten_ca">Chiều</field>
+            <field name="gio_bat_dau">13:30</field>
+            <field name="gio_ket_thuc">17:30</field>
+            <field name="mo_ta">Ca làm việc buổi chiều</field>
+        </record>
+
+        <record id="ca_lam_viec_ca_ngay" model="ca_lam_viec">
+            <field name="ma_ca">CA_NGAY</field>
+            <field name="ten_ca">Cả ngày</field>
+            <field name="gio_bat_dau">07:30</field>
+            <field name="gio_ket_thuc">17:30</field>
+            <field name="mo_ta">Ca làm việc cả ngày (có nghỉ trưa)</field>
+        </record>
+
+        <record id="ca_lam_viec_dem" model="ca_lam_viec">
+            <field name="ma_ca">CA_DEM</field>
+            <field name="ten_ca">Ca đêm</field>
+            <field name="gio_bat_dau">19:00</field>
+            <field name="gio_ket_thuc">23:00</field>
+            <field name="mo_ta">Ca làm việc ban đêm</field>
+        </record>
+
+        <record id="ca_lam_viec_xoay_1" model="ca_lam_viec">
+            <field name="ma_ca">CA_XOAY_1</field>
+            <field name="ten_ca">Ca xoay 1</field>
+            <field name="gio_bat_dau">06:00</field>
+            <field name="gio_ket_thuc">14:00</field>
+            <field name="mo_ta">Ca xoay buổi sáng</field>
+        </record>
+
+        <record id="ca_lam_viec_xoay_2" model="ca_lam_viec">
+            <field name="ma_ca">CA_XOAY_2</field>
+            <field name="ten_ca">Ca xoay 2</field>
+            <field name="gio_bat_dau">14:00</field>
+            <field name="gio_ket_thuc">22:00</field>
+            <field name="mo_ta">Ca xoay buổi chiều</field>
+        </record>
+
+        <record id="ca_lam_viec_12h" model="ca_lam_viec">
+            <field name="ma_ca">CA_12H</field>
+            <field name="ten_ca">Ca 12 giờ</field>
+            <field name="gio_bat_dau">07:00</field>
+            <field name="gio_ket_thuc">19:00</field>
+            <field name="mo_ta">Ca làm việc 12 giờ</field>
+        </record>
+    </data>
+</odoo>

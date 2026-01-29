@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_cau_hinh_luong_form" model="ir.ui.view">
+        <field name="name">cau.hinh.luong.form</field>
+        <field name="model">cau_hinh_luong</field>
+        <field name="arch" type="xml">
+            <form string="Cấu hình tính lương">
+                <sheet>
+                    <group>
+                        <field name="ten_cau_hinh"/>
+                    </group>
+                    <notebook>
+                        <page string="Lương tối thiểu" name="luong_toi_thieu">
+                            <group>
+                                <group string="Lương tối thiểu vùng">
+                                    <field name="luong_toi_thieu_vung_1" widget="monetary"/>
+                                    <field name="luong_toi_thieu_vung_2" widget="monetary"/>
+                                    <field name="luong_toi_thieu_vung_3" widget="monetary"/>
+                                    <field name="luong_toi_thieu_vung_4" widget="monetary"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Bảo hiểm" name="bao_hiem">
+                            <group>
+                                <group string="Bảo hiểm xã hội">
+                                    <field name="ty_le_bhxh_cong_ty"/>
+                                    <field name="ty_le_bhxh_nhan_vien"/>
+                                </group>
+                                <group string="Bảo hiểm y tế">
+                                    <field name="ty_le_bhyt_cong_ty"/>
+                                    <field name="ty_le_bhyt_nhan_vien"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Bảo hiểm thất nghiệp">
+                                    <field name="ty_le_bhtn_cong_ty"/>
+                                    <field name="ty_le_bhtn_nhan_vien"/>
+                                </group>
+                                <group string="Mức đóng">
+                                    <field name="luong_dong_bh_toi_da" widget="monetary"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Thuế TNCN" name="thue">
+                            <group>
+                                <group string="Giảm trừ gia cảnh">
+                                    <field name="giam_tru_ban_than" widget="monetary"/>
+                                    <field name="giam_tru_nguoi_phu_thuoc" widget="monetary"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Phạt và Tăng ca" name="phat_tang_ca">
+                            <group>
+                                <group string="Mức phạt chấm công">
+                                    <field name="muc_phat_di_muon" widget="monetary"/>
+                                    <field name="muc_phat_ve_som" widget="monetary"/>
+                                    <field name="muc_phat_vang_khong_phep" widget="monetary"/>
+                                </group>
+                                <group string="Hệ số tăng ca">
+                                    <field name="he_so_tang_ca_ngay_thuong"/>
+                                    <field name="he_so_tang_ca_ngay_nghi"/>
+                                    <field name="he_so_tang_ca_ngay_le"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Khác" name="khac">
+                            <group>
+                                <group string="Ngày công">
+                                    <field name="so_ngay_cong_chuan"/>
+                                </group>
+                                <group string="Làm tròn">
+                                    <field name="lam_tron_luong"/>
+                                    <field name="buoc_lam_tron" attrs="{'invisible': [('lam_tron_luong', '=', False)]}"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_cau_hinh_luong" model="ir.actions.act_window">
+        <field name="name">Cấu hình tính lương</field>
+        <field name="res_model">cau_hinh_luong</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+    </record>
+</odoo>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view -->
+    <record id="view_tong_hop_cong_thang_form" model="ir.ui.view">
+        <field name="name">tong.hop.cong.thang.form</field>
+        <field name="model">tong_hop_cong_thang</field>
+        <field name="arch" type="xml">
+            <form string="Tổng hợp công tháng">
+                <header>
+                    <button name="action_tinh_lai" string="Tính lại" type="object" 
+                            class="oe_highlight" attrs="{'invisible': [('trang_thai', '!=', 'draft')]}"/>
+                    <button name="action_xac_nhan" string="Xác nhận" type="object" 
+                            class="oe_highlight" attrs="{'invisible': [('trang_thai', '!=', 'draft')]}"/>
+                    <button name="action_khoa" string="Khóa" type="object" 
+                            class="oe_highlight" attrs="{'invisible': [('trang_thai', '!=', 'confirmed')]}"/>
+                    <button name="action_mo_khoa" string="Mở khóa" type="object" 
+                            attrs="{'invisible': [('trang_thai', '!=', 'locked')]}"/>
+                    <field name="trang_thai" widget="statusbar" 
+                           statusbar_visible="draft,confirmed,locked"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="ma_tong_hop" readonly="1"/>
+                            <field name="nhan_vien_id" attrs="{'readonly': [('id', '!=', False)]}"/>
+                            <field name="phong_ban_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="thang" attrs="{'readonly': [('id', '!=', False)]}"/>
+                            <field name="nam" attrs="{'readonly': [('id', '!=', False)]}"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Thống kê chấm công" name="thong_ke">
+                            <group string="Số ngày">
+                                <group>
+                                    <field name="so_ngay_di_lam"/>
+                                    <field name="so_ngay_di_muon"/>
+                                    <field name="so_ngay_ve_som"/>
+                                </group>
+                                <group>
+                                    <field name="so_ngay_vang_mat"/>
+                                    <field name="so_ngay_vang_co_phep"/>
+                                </group>
+                            </group>
+
+                            <group string="Số phút">
+                                <group>
+                                    <field name="tong_phut_di_muon"/>
+                                </group>
+                                <group>
+                                    <field name="tong_phut_ve_som"/>
+                                </group>
+                            </group>
+
+                            <group string="Tỷ lệ">
+                                <group>
+                                    <field name="ty_le_di_lam_dung_gio" widget="percentage"/>
+                                </group>
+                                <group>
+                                    <field name="ty_le_vang_mat" widget="percentage"/>
+                                </group>
+                            </group>
+
+                            <group string="Đánh giá">
+                                <field name="xep_loai" readonly="1" widget="badge"/>
+                            </group>
+                        </page>
+
+                        <page string="Ghi chú" name="ghi_chu">
+                            <field name="ghi_chu" placeholder="Nhập ghi chú..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view -->
+    <record id="view_tong_hop_cong_thang_tree" model="ir.ui.view">
+        <field name="name">tong.hop.cong.thang.tree</field>
+        <field name="model">tong_hop_cong_thang</field>
+        <field name="arch" type="xml">
+            <tree string="Tổng hợp công tháng">
+                <field name="ma_tong_hop"/>
+                <field name="nhan_vien_id"/>
+                <field name="phong_ban_id"/>
+                <field name="thang"/>
+                <field name="nam"/>
+                <field name="so_ngay_di_lam"/>
+                <field name="so_ngay_vang_mat"/>
+                <field name="tong_phut_di_muon"/>
+                <field name="xep_loai" widget="badge"/>
+                <field name="trang_thai" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="view_tong_hop_cong_thang_search" model="ir.ui.view">
+        <field name="name">tong.hop.cong.thang.search</field>
+        <field name="model">tong_hop_cong_thang</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm tổng hợp công">
+                <field name="nhan_vien_id"/>
+                <field name="phong_ban_id"/>
+                <field name="thang"/>
+                <field name="nam"/>
+                <filter string="Tháng này" name="thang_nay" 
+                        domain="[('thang','=',context_today().strftime('%m')), ('nam','=',context_today().strftime('%Y'))]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Phòng ban" name="group_phong_ban" context="{'group_by':'phong_ban_id'}"/>
+                    <filter string="Tháng" name="group_thang" context="{'group_by':'thang'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

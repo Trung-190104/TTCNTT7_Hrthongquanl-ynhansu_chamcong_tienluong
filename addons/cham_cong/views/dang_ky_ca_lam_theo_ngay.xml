@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dang_ky_ca_lam_theo_ngay_form" model="ir.ui.view">
+        <field name="name">dang.ky.ca.lam.theo.ngay.form</field>
+        <field name="model">dang_ky_ca_lam_theo_ngay</field>
+        <field name="arch" type="xml">
+            <form string="Đăng ký ca làm">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="ma_dot_ngay"/>
+                            <field name="dot_dang_ky_id" options="{'no_create': True}"/>
+                            <field name="nhan_vien_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="ngay_lam"/>
+                            <field name="ca_lam"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_dang_ky_ca_lam_theo_ngay_tree" model="ir.ui.view">
+        <field name="name">dang.ky.ca.lam.theo.ngay.tree</field>
+        <field name="model">dang_ky_ca_lam_theo_ngay</field>
+        <field name="arch" type="xml">
+            <tree string="Đăng ký ca làm" editable="top">
+                <field name="ma_dot_ngay"/>
+                <field name="dot_dang_ky_id" options="{'no_create': True}"/>
+                <field name="nhan_vien_id" options="{'no_create': True}"/>
+                <field name="ngay_lam"/>
+                <field name="ca_lam"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu chính Chấm công -->
+    <menuitem id="menu_cham_cong_root" 
+              name="Chấm công" 
+              sequence="30"/>
+
+    <!-- Bảng chấm công -->
+    <menuitem id="menu_bang_cham_cong" 
+              name="Bảng chấm công"
+              parent="menu_cham_cong_root"
+              action="action_bang_cham_cong"
+              sequence="10"/>
+
+    <!-- Tổng hợp công -->
+    <menuitem id="menu_tong_hop_cong" 
+              name="Tổng hợp công tháng"
+              parent="menu_cham_cong_root"
+              action="action_tong_hop_cong_thang"
+              sequence="20"/>
+
+    <!-- Đăng ký ca làm -->
+    <menuitem id="menu_dang_ky_ca"
+              name="Đăng ký ca làm"
+              parent="menu_cham_cong_root"
+              sequence="30"/>
+
+    <menuitem id="menu_dot_dang_ky"
+              name="Đợt đăng ký"
+              parent="menu_dang_ky_ca"
+              action="action_dot_dang_ky"
+              sequence="10"/>
+
+    <menuitem id="menu_dang_ky_ca_lam_theo_ngay"
+              name="Đăng ký theo ngày"
+              parent="menu_dang_ky_ca"
+              action="action_dang_ky_ca_lam_theo_ngay"
+              sequence="20"/>
+
+    <!-- Đơn từ -->
+    <menuitem id="menu_don_tu"
+              name="Đơn từ"
+              parent="menu_cham_cong_root"
+              action="action_don_tu"
+              sequence="40"/>
+
+    <!-- Điểm danh -->
+    <menuitem id="menu_diem_danh"
+              name="Điểm danh"
+              parent="menu_cham_cong_root"
+              sequence="50"/>
+
+    <menuitem id="menu_diem_danh_thu_cong"
+              name="Điểm danh thủ công"
+              parent="menu_diem_danh"
+              action="action_diem_danh_thu_cong"
+              sequence="10"/>
+
+    <!-- Cấu hình -->
+    <menuitem id="menu_cau_hinh_cham_cong"
+              name="Cấu hình"
+              parent="menu_cham_cong_root"
+              sequence="100"/>
+
+    <menuitem id="menu_ca_lam_viec"
+              name="Ca làm việc"
+              parent="menu_cau_hinh_cham_cong"
+              action="action_ca_lam_viec"
+              sequence="10"/>
+</odoo>

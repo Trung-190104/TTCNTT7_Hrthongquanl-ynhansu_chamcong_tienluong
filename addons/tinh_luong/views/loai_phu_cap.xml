@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_loai_phu_cap_tree" model="ir.ui.view">
+        <field name="name">loai.phu.cap.tree</field>
+        <field name="model">loai_phu_cap</field>
+        <field name="arch" type="xml">
+            <tree string="Loại phụ cấp">
+                <field name="ma_phu_cap"/>
+                <field name="ten_phu_cap"/>
+                <field name="loai"/>
+                <field name="muc_phu_cap_mac_dinh" widget="monetary"/>
+                <field name="tinh_bao_hiem" widget="boolean_toggle"/>
+                <field name="tinh_thue" widget="boolean_toggle"/>
+                <field name="so_nhan_vien"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_loai_phu_cap_form" model="ir.ui.view">
+        <field name="name">loai.phu.cap.form</field>
+        <field name="model">loai_phu_cap</field>
+        <field name="arch" type="xml">
+            <form string="Loại phụ cấp">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="ma_phu_cap"/>
+                            <field name="ten_phu_cap"/>
+                            <field name="loai"/>
+                        </group>
+                        <group>
+                            <field name="muc_phu_cap_mac_dinh" widget="monetary"/>
+                            <field name="tinh_bao_hiem"/>
+                            <field name="tinh_thue"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="mo_ta" placeholder="Mô tả..."/>
+                    </group>
+                    <group>
+                        <field name="so_nhan_vien" string="Số nhân viên được hưởng"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_loai_phu_cap" model="ir.actions.act_window">
+        <field name="name">Danh mục phụ cấp</field>
+        <field name="res_model">loai_phu_cap</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

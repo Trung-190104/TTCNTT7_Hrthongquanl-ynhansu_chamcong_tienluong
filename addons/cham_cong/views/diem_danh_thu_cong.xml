@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_diem_danh_thu_cong_form" model="ir.ui.view">
+        <field name="name">diem.danh.thu.cong.form</field>
+        <field name="model">diem_danh_thu_cong</field>
+        <field name="arch" type="xml">
+            <form string="Điểm danh thủ công">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="nhan_vien_id" options="{'no_create': True}"/>
+                            <field name="ngay_cham_cong"/>
+                        </group>
+                        <group>
+                            <field name="loai_diem_danh"/>
+                            <field name="gio_diem_danh"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="ghi_chu" placeholder="Ghi chú..."/>
+                    </group>
+                    <footer>
+                        <button name="action_diem_danh" string="Điểm danh" type="object" class="oe_highlight"/>
+                        <button string="Hủy" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

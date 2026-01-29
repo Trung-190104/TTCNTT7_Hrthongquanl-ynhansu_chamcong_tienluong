@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view -->
+    <record id="view_bang_luong_form" model="ir.ui.view">
+        <field name="name">bang.luong.form</field>
+        <field name="model">bang_luong</field>
+        <field name="arch" type="xml">
+            <form string="Bảng lương">
+                <header>
+                    <button name="action_tinh_luong" string="Tính lương" type="object" 
+                            class="oe_highlight" attrs="{'invisible': [('trang_thai', '!=', 'nhap')]}"/>
+                    <button name="action_duyet" string="Duyệt" type="object" 
+                            class="oe_highlight" attrs="{'invisible': [('trang_thai', '!=', 'da_tinh')]}"/>
+                    <button name="action_thanh_toan" string="Thanh toán" type="object" 
+                            class="oe_highlight" attrs="{'invisible': [('trang_thai', '!=', 'da_duyet')]}"/>
+                    <button name="action_quay_lai_nhap" string="Quay lại nháp" type="object" 
+                            attrs="{'invisible': [('trang_thai', 'not in', ['da_tinh', 'da_duyet'])]}"/>
+                    <field name="trang_thai" widget="statusbar" 
+                           statusbar_visible="nhap,da_tinh,da_duyet,da_thanh_toan"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="ma_bang_luong"/>
+                            <field name="nhan_vien_id" options="{'no_create': True}"/>
+                            <field name="phong_ban_id"/>
+                            <field name="chuc_vu_id"/>
+                        </group>
+                        <group>
+                            <field name="thang"/>
+                            <field name="nam"/>
+                            <field name="ngay_tao"/>
+                            <field name="hop_dong_id" invisible="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <!-- Tab Thông tin lương -->
+                        <page string="Thông tin lương" name="thong_tin_luong">
+                            <group>
+                                <group string="Lương cơ bản">
+                                    <field name="luong_co_ban" widget="monetary"/>
+                                    <field name="so_ngay_cong_chuan"/>
+                                    <field name="so_ngay_lam_viec"/>
+                                    <field name="luong_theo_cong" widget="monetary"/>
+                                </group>
+                                <group string="Chấm công">
+                                    <field name="tong_hop_cong_id"/>
+                                    <field name="so_ngay_nghi_co_phep"/>
+                                    <field name="so_ngay_vang_khong_phep"/>
+                                </group>
+                            </group>
+
+                            <group>
+                                <group string="Thu nhập">
+                                    <field name="tong_phu_cap" widget="monetary"/>
+                                    <field name="tong_thuong" widget="monetary"/>
+                                    <field name="tong_tang_ca" widget="monetary"/>
+                                    <field name="tong_thu_nhap_khac" widget="monetary"/>
+                                </group>
+                                <group>
+                                    <field name="tong_thu_nhap" widget="monetary" 
+                                           class="oe_subtotal_footer_separator"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- Tab Chi tiết thu nhập -->
+                        <page string="Chi tiết thu nhập" name="chi_tiet_thu_nhap">
+                            <group string="Phụ cấp">
+                                <field name="chi_tiet_phu_cap_ids" nolabel="1" context="{'default_loai': 'phu_cap'}">
+                                    <tree editable="bottom">
+                                        <field name="loai" column_invisible="1"/>
+                                        <field name="loai_phu_cap_id" options="{'no_create': True}"/>
+                                        <field name="ten_khoan"/>
+                                        <field name="so_tien" widget="monetary" sum="Tổng"/>
+                                        <field name="ghi_chu"/>
+                                    </tree>
+                                </field>
+                            </group>
+
+                            <group string="Thưởng">
+                                <field name="chi_tiet_thuong_ids" nolabel="1" context="{'default_loai': 'thuong'}">
+                                    <tree editable="bottom">
+                                        <field name="loai" column_invisible="1"/>
+                                        <field name="ten_khoan"/>
+                                        <field name="so_tien" widget="monetary" sum="Tổng"/>
+                                        <field name="ghi_chu"/>
+                                    </tree>
+                                </field>
+                            </group>
+
+                            <group string="Tăng ca">
+                                <field name="chi_tiet_tang_ca_ids" nolabel="1" context="{'default_loai': 'tang_ca'}">
+                                    <tree editable="bottom">
+                                        <field name="loai" column_invisible="1"/>
+                                        <field name="ten_khoan"/>
+                                        <field name="so_luong"/>
+                                        <field name="don_vi"/>
+                                        <field name="don_gia" widget="monetary"/>
+                                        <field name="so_tien" widget="monetary" sum="Tổng"/>
+                                        <field name="ghi_chu"/>
+                                    </tree>
+                                </field>
+                            </group>
+
+                            <group string="Thu nhập khác">
+                                <field name="chi_tiet_thu_nhap_khac_ids" nolabel="1" context="{'default_loai': 'thu_nhap_khac'}">
+                                    <tree editable="bottom">
+                                        <field name="loai" column_invisible="1"/>
+                                        <field name="ten_khoan"/>
+                                        <field name="so_tien" widget="monetary" sum="Tổng"/>
+                                        <field name="ghi_chu"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+
+                        <!-- Tab Khấu trừ -->
+                        <page string="Khấu trừ" name="khau_tru">
+                            <group>
+                                <group string="Bảo hiểm">
+                                    <field name="luong_dong_bao_hiem" widget="monetary"/>
+                                    <field name="bhxh" widget="monetary"/>
+                                    <field name="bhyt" widget="monetary"/>
+                                    <field name="bhtn" widget="monetary"/>
+                                    <field name="tong_bao_hiem" widget="monetary" 
+                                           class="oe_subtotal_footer_separator"/>
+                                </group>
+                                <group string="Thuế TNCN">
+                                    <field name="thu_nhap_chiu_thue" widget="monetary"/>
+                                    <field name="so_nguoi_phu_thuoc"/>
+                                    <field name="giam_tru_gia_canh" widget="monetary"/>
+                                    <field name="thu_nhap_tinh_thue" widget="monetary"/>
+                                    <field name="thue_tncn" widget="monetary" 
+                                           class="oe_subtotal_footer_separator"/>
+                                </group>
+                            </group>
+
+                            <group string="Phạt">
+                                <field name="chi_tiet_phat_ids" nolabel="1" context="{'default_loai': 'phat'}">
+                                    <tree editable="bottom">
+                                        <field name="loai" column_invisible="1"/>
+                                        <field name="ten_khoan"/>
+                                        <field name="so_luong"/>
+                                        <field name="don_vi"/>
+                                        <field name="don_gia" widget="monetary"/>
+                                        <field name="so_tien" widget="monetary" sum="Tổng"/>
+                                        <field name="ghi_chu"/>
+                                    </tree>
+                                </field>
+                            </group>
+
+                            <group string="Khấu trừ khác">
+                                <field name="chi_tiet_khau_tru_khac_ids" nolabel="1" context="{'default_loai': 'khau_tru_khac'}">
+                                    <tree editable="bottom">
+                                        <field name="loai" column_invisible="1"/>
+                                        <field name="ten_khoan"/>
+                                        <field name="so_tien" widget="monetary" sum="Tổng"/>
+                                        <field name="ghi_chu"/>
+                                    </tree>
+                                </field>
+                            </group>
+
+                            <group>
+                                <group string="Tổng khấu trừ">
+                                    <field name="tong_phat" widget="monetary"/>
+                                    <field name="tong_khau_tru_khac" widget="monetary"/>
+                                    <field name="tong_khau_tru" widget="monetary" 
+                                           class="oe_subtotal_footer_separator"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- Tab Thanh toán -->
+                        <page string="Thanh toán" name="thanh_toan">
+                            <group>
+                                <group>
+                                    <field name="tong_thu_nhap" widget="monetary" readonly="1"/>
+                                    <field name="tong_khau_tru" widget="monetary" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="luong_thuc_linh" widget="monetary" readonly="1"
+                                           class="oe_subtotal_footer_separator" 
+                                           style="font-size: 18px; font-weight: bold;"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="ngay_thanh_toan"/>
+                                    <field name="nguoi_thanh_toan_id"/>
+                                </group>
+                                <group>
+                                    <field name="ghi_chu" placeholder="Ghi chú..."/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view -->
+    <record id="view_bang_luong_tree" model="ir.ui.view">
+        <field name="name">bang.luong.tree</field>
+        <field name="model">bang_luong</field>
+        <field name="arch" type="xml">
+            <tree string="Bảng lương" decoration-info="trang_thai=='nhap'" 
+                  decoration-success="trang_thai=='da_thanh_toan'">
+                <field name="ma_bang_luong"/>
+                <field name="nhan_vien_id"/>
+                <field name="phong_ban_id"/>
+                <field name="thang"/>
+                <field name="nam"/>
+                <field name="luong_co_ban" widget="monetary" sum="Tổng"/>
+                <field name="tong_thu_nhap" widget="monetary" sum="Tổng"/>
+                <field name="tong_khau_tru" widget="monetary" sum="Tổng"/>
+                <field name="luong_thuc_linh" widget="monetary" sum="Tổng"/>
+                <field name="trang_thai" widget="badge" 
+                       decoration-info="trang_thai=='nhap'"
+                       decoration-warning="trang_thai=='da_tinh'"
+                       decoration-primary="trang_thai=='da_duyet'"
+                       decoration-success="trang_thai=='da_thanh_toan'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="view_bang_luong_search" model="ir.ui.view">
+        <field name="name">bang.luong.search</field>
+        <field name="model">bang_luong</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm bảng lương">
+                <field name="ma_bang_luong"/>
+                <field name="nhan_vien_id"/>
+                <field name="phong_ban_id"/>
+                <field name="thang"/>
+                <field name="nam"/>
+                <filter string="Tháng này" name="thang_nay" 
+                        domain="[('thang','=',context_today().strftime('%m')), ('nam','=',context_today().strftime('%Y'))]"/>
+                <filter string="Nháp" name="nhap" domain="[('trang_thai','=','nhap')]"/>
+                <filter string="Đã tính" name="da_tinh" domain="[('trang_thai','=','da_tinh')]"/>
+                <filter string="Đã duyệt" name="da_duyet" domain="[('trang_thai','=','da_duyet')]"/>
+                <filter string="Đã thanh toán" name="da_thanh_toan" domain="[('trang_thai','=','da_thanh_toan')]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Phòng ban" name="group_phong_ban" context="{'group_by':'phong_ban_id'}"/>
+                    <filter string="Tháng" name="group_thang" context="{'group_by':'thang'}"/>
+                    <filter string="Năm" name="group_nam" context="{'group_by':'nam'}"/>
+                    <filter string="Trạng thái" name="group_trang_thai" context="{'group_by':'trang_thai'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_bang_luong" model="ir.actions.act_window">
+        <field name="name">Bảng lương</field>
+        <field name="res_model">bang_luong</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_thang_nay': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo bảng lương mới
+            </p>
+        </field>
+    </record>
+</odoo>

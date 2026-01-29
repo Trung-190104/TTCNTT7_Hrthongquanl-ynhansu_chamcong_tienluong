@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu chính Tính lương -->
+    <menuitem id="menu_tinh_luong_root" 
+              name="Tính lương" 
+              sequence="40"
+              web_icon="tinh_luong,static/description/icon.png"/>
+
+    <!-- ============ BẢNG LƯƠNG ============ -->
+    <menuitem id="menu_bang_luong" 
+              name="Bảng lương"
+              parent="menu_tinh_luong_root"
+              action="action_bang_luong"
+              sequence="10"/>
+
+    <!-- ============ PHỤ CẤP ============ -->
+    <menuitem id="menu_phu_cap"
+              name="Phụ cấp"
+              parent="menu_tinh_luong_root"
+              sequence="20"/>
+
+    <menuitem id="menu_phu_cap_nhan_vien"
+              name="Phụ cấp nhân viên"
+              parent="menu_phu_cap"
+              action="action_phu_cap_nhan_vien"
+              sequence="10"/>
+
+    <menuitem id="menu_loai_phu_cap"
+              name="Danh mục phụ cấp"
+              parent="menu_phu_cap"
+              action="action_loai_phu_cap"
+              sequence="20"/>
+
+    <!-- ============ BÁO CÁO ============ -->
+    <menuitem id="menu_bao_cao_luong"
+              name="Báo cáo"
+              parent="menu_tinh_luong_root"
+              sequence="30"/>
+
+    <menuitem id="menu_bao_cao_luong_tong_hop"
+              name="Báo cáo lương"
+              parent="menu_bao_cao_luong"
+              action="action_bao_cao_luong"
+              sequence="10"/>
+
+    <!-- ============ CẤU HÌNH ============ -->
+    <menuitem id="menu_cau_hinh"
+              name="Cấu hình"
+              parent="menu_tinh_luong_root"
+              sequence="100"/>
+
+    <menuitem id="menu_cau_hinh_luong"
+              name="Cấu hình tính lương"
+              parent="menu_cau_hinh"
+              action="action_cau_hinh_luong"
+              sequence="10"/>
+
+    <menuitem id="menu_thue_tncn_bac"
+              name="Bậc thuế TNCN"
+              parent="menu_cau_hinh"
+              action="action_thue_tncn_bac"
+              sequence="20"/>
+</odoo>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view -->
+    <record id="view_bang_cham_cong_form" model="ir.ui.view">
+        <field name="name">bang.cham.cong.form</field>
+        <field name="model">bang_cham_cong</field>
+        <field name="arch" type="xml">
+            <form string="Bảng chấm công">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="nhan_vien_id" options="{'no_create': True}"/>
+                            <field name="ngay_cham_cong"/>
+                            <field name="Id_BCC" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="dang_ky_ca_lam_id" readonly="1"/>
+                            <field name="ca_lam_viec_id" readonly="1"/>
+                            <field name="ca_lam" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <group string="Thời gian làm việc">
+                        <group>
+                            <field name="gio_vao_ca" readonly="1"/>
+                            <field name="gio_ra_ca" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="gio_vao"/>
+                            <field name="gio_ra"/>
+                        </group>
+                    </group>
+
+                    <group string="Phương thức điểm danh">
+                        <group>
+                            <field name="phuong_thuc_diem_danh_vao" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="phuong_thuc_diem_danh_ra" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Tình trạng chấm công">
+                        <group>
+                            <field name="phut_di_muon_goc" readonly="1"/>
+                            <field name="phut_di_muon" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="phut_ve_som_goc" readonly="1"/>
+                            <field name="phut_ve_som" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Đơn từ">
+                        <field name="don_tu_id" readonly="1"/>
+                        <field name="loai_don" readonly="1"/>
+                        <field name="thoi_gian_xin" readonly="1"/>
+                    </group>
+
+                    <group>
+                        <field name="trang_thai" readonly="1" widget="badge"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view -->
+    <record id="view_bang_cham_cong_tree" model="ir.ui.view">
+        <field name="name">bang.cham.cong.tree</field>
+        <field name="model">bang_cham_cong</field>
+        <field name="arch" type="xml">
+            <tree string="Bảng chấm công">
+                <field name="nhan_vien_id"/>
+                <field name="ngay_cham_cong"/>
+                <field name="ca_lam"/>
+                <field name="gio_vao"/>
+                <field name="gio_ra"/>
+                <field name="phut_di_muon"/>
+                <field name="phut_ve_som"/>
+                <field name="trang_thai" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="view_bang_cham_cong_search" model="ir.ui.view">
+        <field name="name">bang.cham.cong.search</field>
+        <field name="model">bang_cham_cong</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm chấm công">
+                <field name="nhan_vien_id"/>
+                <field name="ngay_cham_cong"/>
+                <filter string="Hôm nay" name="today" 
+                        domain="[('ngay_cham_cong','=',context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Đi muộn" name="di_muon" 
+                        domain="[('phut_di_muon','>',0)]"/>
+                <filter string="Về sớm" name="ve_som" 
+                        domain="[('phut_ve_som','>',0)]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Nhân viên" name="group_nhan_vien" context="{'group_by':'nhan_vien_id'}"/>
+                    <filter string="Ngày" name="group_ngay" context="{'group_by':'ngay_cham_cong'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>
